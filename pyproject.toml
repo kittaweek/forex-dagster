@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "forex-dagster"
+version = "0.1.0"
+description = "Forex prediction pipeline by Dagster"
+authors = ["Kittawee Kognpan <kittawee9469@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+dagster = "^1.5.9"
+dagit = "^1.5.9"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
