@@ -7,9 +7,12 @@ license = "MIT"
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "3.11.4"
 dagster = "^1.5.9"
 dagit = "^1.5.9"
+scrapy = "==2.9.0"
+twisted = "==22.10.0"
+python-dotenv = "^1.0.0"
 
 
 [build-system]
