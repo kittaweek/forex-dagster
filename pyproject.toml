@@ -7,13 +7,19 @@ license = "MIT"
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "3.11.4"
+python = "^3.12"
 dagster = "^1.5.9"
 dagit = "^1.5.9"
-scrapy = "==2.9.0"
-twisted = "==22.10.0"
-python-dotenv = "^1.0.0"
+# python-dotenv = "^1.0.0"
+google-cloud-storage = "^2.14.0"
+pyspark = "^3.5.0"
+scikit-learn = "^1.4.1.post1"
 
+
+[tool.poetry.group.dev.dependencies]
+jupyterlab = "^4.1.2"
+jupyter-black = "^0.3.4"
+seaborn = "^0.13.2"
 
 [build-system]
 requires = ["poetry-core"]
