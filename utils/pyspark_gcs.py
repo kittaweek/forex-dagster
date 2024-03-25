@@ -10,7 +10,7 @@ from pyspark import SparkConf
 from pyspark.sql import SparkSession
 
 logger = logging.getLogger(__name__)
-project_path = Path().resolve().parent
+project_path = Path().resolve()
 
 
 def _get_spark_jars_path() -> Path:
@@ -43,7 +43,7 @@ def _find_major_version_of_hadoop(jars: Path) -> int:
     return 2 if len(list(jars.glob("hadoop-common-2*"))) else 3
 
 
-def get_gcs_enabled_config(
+def _get_gcs_enabled_config(
     project: Optional[str] = None,
     email: Optional[str] = None,
     jars_dir: Optional[Path] = None,
@@ -84,7 +84,7 @@ def get_gcs_enabled_config(
         else:
             logger.debug("Inferred Hadoop 3, using hadoop3 GCS connector jar")
             gcs_connector_jar = project_path.joinpath(
-                "jars", "gcs-connector-hadoop2-latest.jar"
+                "utils/jars", "gcs-connector-hadoop2-latest.jar"
             )
         assert gcs_connector_jar.exists(), (
             "There is something wrong with the pyspark_gcs installation, "
@@ -113,11 +113,12 @@ def get_spark_gcs_session(
         raise ValueError(
             f"Service Account keyfile {service_account_keyfile_path} does not exist"
         )
-    return SparkSession.builder.config(
-        conf=get_gcs_enabled_config(
+    spark = SparkSession.builder.config(
+        conf=_get_gcs_enabled_config(
             project=project,
             email=email,
             conf=conf,
             service_account_keyfile_path=service_account_keyfile_path,
         ),
-    ).getOrCreate()
+    )
+    return spark.getOrCreate()

@@ -1,5 +1,4 @@
-from missing_data.job import do_stuff2
+from missing_data.assets import assets
+from missing_data.assets import job
 
-repos = [
-    do_stuff2,
-]
+repos = [assets, job]

@@ -1,5 +1,4 @@
-from experiment.job import do_stuff
+from experiment.assets import assets
+from experiment.assets import job
 
-repos = [
-    do_stuff,
-]
+repos = [assets, job]

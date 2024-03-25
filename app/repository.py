@@ -4,14 +4,8 @@ from missing_data.repository import repos as missing_data_repo
 
 
 @repository
-def missing_data():
+def forex_ai():
     return [
-        missing_data_repo,
-    ]
-
-
-@repository
-def experiment():
-    return [
-        experiment_repo,
+        *missing_data_repo,
+        *experiment_repo,
     ]

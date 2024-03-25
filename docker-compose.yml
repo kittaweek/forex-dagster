@@ -14,21 +14,21 @@ services:
   forex_ai_user_code:
     build:
       context: .
-      dockerfile: ./docker/user_code/Dockerfile
+      dockerfile: ./docker/user_code.Dockerfile
     container_name: forex_ai_user_code
     image: forex_ai_user_code_image
     restart: always
     environment:
-      DAGSTER_POSTGRES_USER: ${POSTGRES_USER}
-      DAGSTER_POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      DAGSTER_POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
       DAGSTER_CURRENT_IMAGE: "forex_ai_user_code_image"
     networks:
       - forex_ai_network
   forex_ai_webserver:
     build:
       context: .
-      dockerfile: ./docker/dagster/Dockerfile
+      dockerfile: ./docker/dagster.Dockerfile
     entrypoint:
       - dagster-webserver
       - -h
@@ -41,9 +41,9 @@ services:
     ports:
       - "${DAGSTER_WEBSERVER_PORT}:3000"
     environment:
-      DAGSTER_POSTGRES_USER: ${POSTGRES_USER}
-      DAGSTER_POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      DAGSTER_POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /tmp/io_manager_storage:/tmp/io_manager_storage
@@ -55,16 +55,16 @@ services:
   forex_ai_daemon:
     build:
       context: .
-      dockerfile: ./docker/dagster/Dockerfile
+      dockerfile: ./docker/dagster.Dockerfile
     entrypoint:
       - dagster-daemon
       - run
     container_name: forex_ai_daemon
     restart: on-failure
     environment:
-      DAGSTER_POSTGRES_USER: ${POSTGRES_USER}
-      DAGSTER_POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      DAGSTER_POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /tmp/io_manager_storage:/tmp/io_manager_storage
